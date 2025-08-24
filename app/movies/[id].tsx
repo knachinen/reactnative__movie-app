@@ -115,7 +115,8 @@ const MovieDetails = () => {
       </ScrollView>
 
       <TouchableOpacity
-        className="absolute bottom-5 left-0 right-0 mx-5 bg-accent rounded-lg py-3.5 flex flex-row items-center z-50"
+        className="absolute bottom-5 py-3.5 z-50 flex-row items-center justify-center rounded-lg bg-accent left-0 right-0 flex mx-5"
+        // className="absolute bottom-5 py-3.5 z-50 self-center flex flex-row items-center justify-center rounded-lg bg-accent px-5"
         onPress={router.back}
       >
         <Image
