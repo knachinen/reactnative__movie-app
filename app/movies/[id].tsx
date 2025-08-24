@@ -104,7 +104,7 @@ const MovieDetails = () => {
       <TouchableOpacity
         className="absolute top-5 p-3.5 z-50 flex-row items-center justify-center rounded-lg bg-accent self-end flex mx-5"
         onPress={async () => {
-          await saveMovie(movieDetails!.id);
+          await saveMovie(movieDetails as MovieDetails);
           await handleSaveToggle();
         }}
       >

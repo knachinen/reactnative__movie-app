@@ -57,20 +57,24 @@ export const getTrendingMovies = async (): Promise<
   }
 };
 
-export const saveMovie = async (movie_id: number) => {
+export const saveMovie = async (details: MovieDetails): Promise<void> => {
   try {
-    // console.log("Saving movie with ID:", movie_id);
+    console.log("Saving movie with ID:", details);
     const result = await database.createDocument(
       DATABASE_ID,
       process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_SAVED!,
       ID.unique(),
       {
-        movie_id: movie_id,
+        movie_id: details.id,
+        title: details.title,
+        poster_url: `https://image.tmdb.org/t/p/w500${details.poster_path}`,
+        vote_average: details.vote_average,
+        release_date: details.release_date,
         saved: true,
       }
     );
-    // console.log("Movie saved:", result);
-    return result;
+    console.log("Movie saved:", result);
+    // return result;
   } catch (error) {
     console.error("Error saving movie:", error);
     throw error;
