@@ -75,3 +75,8 @@ interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
 }
+
+interface SavedMovie {
+  movie_id: number;
+  saved: boolean;
+}

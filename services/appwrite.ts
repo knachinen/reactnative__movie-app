@@ -56,3 +56,56 @@ export const getTrendingMovies = async (): Promise<
     return undefined;
   }
 };
+
+export const saveMovie = async (movie_id: number) => {
+  try {
+    // console.log("Saving movie with ID:", movie_id);
+    const result = await database.createDocument(
+      DATABASE_ID,
+      process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_SAVED!,
+      ID.unique(),
+      {
+        movie_id: movie_id,
+        saved: true,
+      }
+    );
+    // console.log("Movie saved:", result);
+    return result;
+  } catch (error) {
+    console.error("Error saving movie:", error);
+    throw error;
+  }
+};
+
+export const checkIfMovieSaved = async (movie_id: number): Promise<boolean> => {
+  try {
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_SAVED!,
+      [Query.equal("movie_id", movie_id), Query.equal("saved", true)]
+    );
+    return result.documents.length > 0;
+  } catch (error) {
+    console.error("Error checking if movie is saved:", error);
+    return false;
+  }
+};
+
+export const getSavedMovies = async (): Promise<SavedMovie[] | undefined> => {
+  try {
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_SAVED!,
+      [Query.equal("saved", true)]
+    );
+
+    if (result.documents.length === 0) {
+      return [];
+    } else {
+      return result.documents as unknown as SavedMovie[];
+    }
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};

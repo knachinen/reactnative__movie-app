@@ -1,6 +1,6 @@
 import { icons } from "@/constants/icons";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 const Profile = () => {
   return (
@@ -14,5 +14,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-const styles = StyleSheet.create({});
